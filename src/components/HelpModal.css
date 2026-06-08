@@ -1,0 +1,82 @@
+.help-modal {
+  max-width: 450px;
+}
+
+.help-tabs {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid #4a4f55;
+  margin-bottom: 15px;
+}
+
+.help-tab {
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #8a7f75;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.help-tab.active {
+  color: #e65f3c;
+  border-bottom-color: #e65f3c;
+}
+
+.help-content {
+  min-height: 200px;
+}
+
+.shortcut-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.shortcut-key {
+  background: #3a3e42;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: monospace;
+  color: #e65f3c;
+  font-weight: bold;
+  min-width: 80px;
+  text-align: center;
+}
+
+.shortcut-desc {
+  color: #f0e9e0;
+}
+
+.color-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px currentColor;
+}
+
+.modal-box {
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}

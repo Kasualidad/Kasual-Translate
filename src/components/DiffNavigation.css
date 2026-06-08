@@ -1,0 +1,30 @@
+.diff-nav {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.diff-nav button {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.16s, border-color 0.16s, color 0.16s;
+}
+
+.diff-nav button:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--bg-tertiary);
+  color: var(--accent-light);
+}
+
+.diff-nav button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}

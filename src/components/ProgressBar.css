@@ -1,0 +1,203 @@
+.progress-track {
+  height: 44px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+    var(--bg-elevated);
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  margin: 10px 20px 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 8px 20px rgba(0,0,0,0.18);
+  animation: scannerDock 240ms ease-out both;
+}
+
+.progress-track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(var(--accent-rgb),0.08) 0 1px, transparent 1px 14px),
+    linear-gradient(90deg, transparent, rgba(var(--accent-rgb),0.12), transparent);
+  opacity: 0.42;
+  transform: translateX(-30%);
+  animation: terminalScan 1.4s linear infinite;
+  pointer-events: none;
+}
+
+.progress-track::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb),0.72);
+  animation: scannerBlink 1s ease-in-out infinite;
+  z-index: 12;
+}
+
+.progress-track:focus-within,
+.progress-track:hover {
+  border-color: rgba(var(--accent-rgb),0.58);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 10px 24px rgba(0,0,0,0.22),
+    0 0 18px rgba(var(--accent-rgb),0.14);
+}
+
+.progress-fill {
+  height: 30px;
+  min-width: 30px;
+  background:
+    linear-gradient(90deg, var(--accent-dark), var(--accent-light));
+  border-radius: 7px;
+  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  color: #071412;
+  font-weight: 800;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.14), 0 0 18px rgba(var(--accent-rgb),0.24);
+  z-index: 2;
+  margin-left: 7px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.18);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.progress-fill.indeterminate {
+  width: 42%;
+  animation: indeterminate 1.4s infinite linear;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent-light), var(--accent-dark));
+  background-size: 200% 100%;
+  justify-content: center;
+  padding-right: 0;
+}
+
+@keyframes indeterminate {
+  0% { transform: translateX(-95%); }
+  100% { transform: translateX(225%); }
+}
+
+.progress-runner {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  top: 50%;
+  object-fit: contain;
+  border-radius: 9px;
+  border: 1px solid rgba(255,255,255,0.16);
+  transform: translate(-50%, -50%);
+  transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.55));
+  pointer-events: none;
+  animation: runnerBob 820ms ease-in-out infinite;
+}
+
+.progress-runner::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  border: 1px solid rgba(var(--accent-rgb),0.28);
+}
+
+.progress-text-outside {
+  position: absolute;
+  left: 54px;
+  right: 120px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.84rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 5;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+  pointer-events: none;
+}
+
+.abort-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--error);
+  color: var(--error);
+  padding: 6px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: 750;
+  z-index: 20;
+  transition: background-color 0.16s, color 0.16s, border-color 0.16s;
+}
+
+.abort-btn:hover {
+  background: var(--error);
+  color: #fff;
+}
+
+@keyframes scannerDock {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes terminalScan {
+  from { transform: translateX(-36%); }
+  to { transform: translateX(36%); }
+}
+
+@keyframes scannerBlink {
+  0%, 100% { opacity: 0.42; transform: scale(0.82); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+@keyframes runnerBob {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -3px; }
+}

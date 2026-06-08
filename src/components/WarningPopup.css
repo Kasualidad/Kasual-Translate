@@ -1,0 +1,176 @@
+.warning-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(5px) saturate(0.8);
+  animation: fadeIn 160ms ease-out both;
+}
+
+.warning-popup-backdrop.is-closing {
+  animation: warningBackdropOut 190ms cubic-bezier(.4,0,.2,1) both;
+}
+
+.warning-popup-backdrop.is-closing .warning-popup {
+  pointer-events: none;
+  animation: warningPopOut 190ms cubic-bezier(.4,0,.2,1) both;
+}
+
+.warning-popup {
+  position: relative;
+  width: min(520px, 94vw);
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid rgba(var(--error-rgb),0.72);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(var(--error-rgb),0.22), transparent 38%),
+    linear-gradient(180deg, rgba(255,255,255,0.09), rgba(0,0,0,0.16)),
+    var(--bg-elevated);
+  box-shadow:
+    0 28px 70px rgba(0,0,0,0.55),
+    0 0 0 4px rgba(var(--error-rgb),0.16),
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 0 0 1px rgba(0,0,0,0.18);
+  animation: warningPop 180ms cubic-bezier(.2,.8,.25,1) both, warningGlow 2.4s ease-in-out infinite;
+}
+
+.warning-popup::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 4px;
+  border-radius: 12px 12px 0 0;
+  background: repeating-linear-gradient(135deg, var(--error) 0 10px, rgba(0,0,0,0.35) 10px 20px);
+  animation: warningStripeMove 1.4s linear infinite;
+}
+
+.warning-popup-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(var(--error-rgb),0.42);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  background: rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.warning-popup-close:hover {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.warning-popup-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--error);
+  background: rgba(var(--error-rgb),0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 0 22px rgba(var(--error-rgb),0.24);
+  animation: warningIconPulse 1.2s ease-in-out infinite;
+}
+
+.warning-popup-icon svg {
+  font-size: 1.7rem;
+  filter: drop-shadow(0 0 8px rgba(var(--error-rgb),0.45));
+}
+
+.warning-popup-copy {
+  min-width: 0;
+  padding-right: 28px;
+}
+
+.warning-popup-copy h2 {
+  margin: 0 0 8px;
+  color: var(--error);
+  font-size: 1.24rem;
+}
+
+.warning-popup-copy p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.warning-popup-action {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 4px;
+}
+
+@keyframes warningPop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes warningPopOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(7px) scale(0.985);
+    filter: blur(0.8px);
+  }
+}
+
+@keyframes warningBackdropOut {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(5px) saturate(0.8);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(1px) saturate(1);
+  }
+}
+
+@keyframes warningGlow {
+  0%, 100% { box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 0 0 4px rgba(var(--error-rgb),0.12), inset 0 1px 0 rgba(255,255,255,0.12), inset 0 0 0 1px rgba(0,0,0,0.18); }
+  50% { box-shadow: 0 28px 70px rgba(0,0,0,0.58), 0 0 0 5px rgba(var(--error-rgb),0.2), 0 0 28px rgba(var(--error-rgb),0.2), inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 0 1px rgba(0,0,0,0.18); }
+}
+
+@keyframes warningStripeMove {
+  from { background-position: 0 0; }
+  to { background-position: 28px 0; }
+}
+
+@keyframes warningIconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@media (max-width: 560px) {
+  .warning-popup {
+    grid-template-columns: 1fr;
+  }
+
+  .warning-popup-action {
+    grid-column: 1;
+  }
+}

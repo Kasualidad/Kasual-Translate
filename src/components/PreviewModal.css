@@ -1,0 +1,56 @@
+.preview-modal {
+  max-width: 900px;
+  width: 90%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-editor {
+  flex: 1;
+  background: #1a1c1e;
+  border: 1px solid #4a4f55;
+  border-radius: 8px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+.preview-textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: #f0e9e0;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 15px;
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.preview-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.history-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-box {
+  animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
